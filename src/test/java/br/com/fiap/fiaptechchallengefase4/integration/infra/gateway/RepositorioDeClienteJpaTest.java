@@ -71,10 +71,21 @@ class RepositorioDeClienteJpaTest {
 
     @Test
     void obterClientePorCPF() {
+        Cliente cliente = new Cliente("Nome", "123.456.789-00", "email@exemplo.com", "123456");
+        repositorioDeClienteJpa.cadastrarCliente(cliente);
+
+        Cliente encontrado = repositorioDeClienteJpa.obterClientePorCPF("123.456.789-00");
+        assertEquals(cliente.getNome(), encontrado.getNome());
     }
 
     @Test
     void obterPorID() {
+        Cliente cliente = new Cliente("Nome", "123.456.789-00", "email@exemplo.com", "123456");
+        Cliente cadastrado = repositorioDeClienteJpa.cadastrarCliente(cliente);
+
+        Cliente encontrado = repositorioDeClienteJpa.obterPorID(cadastrado.getId());
+        assertEquals(cadastrado.getId(), encontrado.getId());
+        assertEquals(cadastrado.getNome(), encontrado.getNome());
     }
 
     @Test
